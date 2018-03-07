@@ -32,6 +32,10 @@ module.exports = (credential) => {
     region,
   } = credential;
 
+  if (!bucket || !key || !secret || !region) {
+    throw new Error('Incorrect credential');
+  }
+
   const s3Client = Bluebird.promisifyAll(knox.createClient({
     bucket,
     key,

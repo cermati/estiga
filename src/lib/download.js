@@ -12,8 +12,10 @@ const Bluebird = require('bluebird');
  * @param destination
  * @return {Promise}
  */
-module.exports = (s3Client, s3Path, destination, logger = console) => {
-  logger.info(
+module.exports = (s3Client, s3Path, destination, options = { log: _.noop }) => {
+  const { log } = options;
+
+  log.info(
     'Downloading file from S3 \nS3 path: %s \nDestination Path: %s\n',
     s3Path,
     destination,

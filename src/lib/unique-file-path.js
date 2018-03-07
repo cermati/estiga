@@ -4,7 +4,7 @@
 
 const self = exports;
 const fileExists = require('./file-exists');
-const fileUtils = require('../../utils/file');
+const fileUtils = require('../utils/file');
 
 /**
  * Returns unique filepath if the given filepath exists in amazon s3. It will

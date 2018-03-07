@@ -13,16 +13,17 @@ const Bluebird = require('bluebird');
  * @param remotePath
  * @return {Promise} - Bluebird promise instance
  */
-module.exports = (s3Client, remotePath, logger = console) => {
+module.exports = (s3Client, remotePath, options = { log: _.noop }) => {
   let promise;
+  const { log } = options;
 
-  logger.info('\nDELETING file %s on S3\n', remotePath);
+  log.info('\nDELETING file %s on S3\n', remotePath);
 
   if (_.isArray(remotePath)) {
     promise = s3Client
       .deleteMultipleAsync(remotePath)
       .then((response) => {
-        logger.info('\nDELETED file %s on S3\n', remotePath);
+        log.info('\nDELETED file %s on S3\n', remotePath);
 
         return response;
       })
@@ -39,7 +40,7 @@ module.exports = (s3Client, remotePath, logger = console) => {
     promise = s3Client
       .deleteFileAsync(remotePath)
       .then((response) => {
-        logger.info('\nDELETED file %s on S3\n', remotePath);
+        log.info('\nDELETED file %s on S3\n', remotePath);
 
         return response;
       })

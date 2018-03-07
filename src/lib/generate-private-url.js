@@ -6,7 +6,7 @@ const _ = require('lodash');
 const util = require('util');
 const crypto = require('crypto');
 
-const constant = require('../../utils/constants');
+const constant = require('../utils/constants');
 
 function generateCanonicalString(url, expires) {
   const strippedBaseUrl = `/${url.split('/').slice(3).join('/')}`;

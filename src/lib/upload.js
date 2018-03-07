@@ -15,8 +15,9 @@ const util = require('util');
  * @param {String} destination
  * @return {Promise}
  */
-module.exports = (s3Client, fileData, destination, logger = console) => {
+module.exports = (s3Client, fileData, destination, options = { log: _.noop }) => {
   let file = fileData;
+  const { log } = options;
 
   if (_.isString(fileData)) {
     file = {
@@ -24,7 +25,7 @@ module.exports = (s3Client, fileData, destination, logger = console) => {
     };
   }
 
-  logger.info(
+  log.info(
     '\nUPLOADING file to S3 \nlocal path: %s \nS3 path: %s\n',
     file.path,
     destination,
@@ -44,7 +45,7 @@ module.exports = (s3Client, fileData, destination, logger = console) => {
 
   return promise
     .then(() => {
-      logger.info('\nUPLOADED file to S3\nlocal path:%s \nS3 path: %s\n', file.path, destination);
+      log.info('\nUPLOADED file to S3\nlocal path:%s \nS3 path: %s\n', file.path, destination);
 
       return file;
     })

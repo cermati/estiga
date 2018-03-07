@@ -2,6 +2,7 @@
  * @module /src/lib/copy.js
 */
 
+const _ = require('lodash');
 const util = require('util');
 const Bluebird = require('bluebird');
 
@@ -11,13 +12,15 @@ const Bluebird = require('bluebird');
  * @param destination
  * @return {Promise}
  */
-module.exports = (s3Client, source, destination, logger = console) => {
-  logger.info('\nCOPYING file from S3 \nsource: %s \nto S3 path: %s\n', source, destination);
+module.exports = (s3Client, source, destination, options = { log: _.noop }) => {
+  const { log } = options;
+
+  log('\nCOPYING file from S3 \nsource: %s \nto S3 path: %s\n', source, destination);
 
   return s3Client
     .copyFileAsync(source, destination)
     .then(() => {
-      logger.info('\nCOPIED file from S3\nsource:%s \nto S3 path: %s\n', source, destination);
+      log('\nCOPIED file from S3\nsource:%s \nto S3 path: %s\n', source, destination);
 
       return true;
     })
