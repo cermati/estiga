@@ -1,5 +1,5 @@
 /**
- * @module src/lib/uniqueFilepath.js
+ * @module src/lib/unique-file-path.js
 */
 
 const self = exports;

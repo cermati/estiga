@@ -17,13 +17,13 @@ module.exports = (s3Client, remotePath, options = { log: _.noop }) => {
   let promise;
   const { log } = options;
 
-  log.info('\nDELETING file %s on S3\n', remotePath);
+  log('\nDELETING file %s on S3\n', remotePath);
 
   if (_.isArray(remotePath)) {
     promise = s3Client
       .deleteMultipleAsync(remotePath)
       .then((response) => {
-        log.info('\nDELETED file %s on S3\n', remotePath);
+        log('\nDELETED file %s on S3\n', remotePath);
 
         return response;
       })
@@ -40,7 +40,7 @@ module.exports = (s3Client, remotePath, options = { log: _.noop }) => {
     promise = s3Client
       .deleteFileAsync(remotePath)
       .then((response) => {
-        log.info('\nDELETED file %s on S3\n', remotePath);
+        log('\nDELETED file %s on S3\n', remotePath);
 
         return response;
       })

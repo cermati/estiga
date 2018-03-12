@@ -2,6 +2,7 @@
  * @module /src/lib/download.js
  */
 
+const _ = require('lodash');
 const fs = require('fs');
 const util = require('util');
 const Bluebird = require('bluebird');
@@ -15,7 +16,7 @@ const Bluebird = require('bluebird');
 module.exports = (s3Client, s3Path, destination, options = { log: _.noop }) => {
   const { log } = options;
 
-  log.info(
+  log(
     'Downloading file from S3 \nS3 path: %s \nDestination Path: %s\n',
     s3Path,
     destination,
@@ -37,13 +38,13 @@ module.exports = (s3Client, s3Path, destination, options = { log: _.noop }) => {
         .on('error', reject)
         .pipe(writeStream);
 
-      return Bluebird.resolve();
+      return resolve();
     });
   });
 
   return promise
     .then(() => {
-      logger.info('\nDownloaded file from S3\nS3 path: %s\nto local path:%s \n', s3Path, destination);
+      log('\nDownloaded file from S3\nS3 path: %s\nto local path:%s \n', s3Path, destination);
 
       return Bluebird.resolve(destination);
     })

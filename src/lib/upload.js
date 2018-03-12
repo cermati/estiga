@@ -25,7 +25,7 @@ module.exports = (s3Client, fileData, destination, options = { log: _.noop }) =>
     };
   }
 
-  log.info(
+  log(
     '\nUPLOADING file to S3 \nlocal path: %s \nS3 path: %s\n',
     file.path,
     destination,
@@ -45,7 +45,7 @@ module.exports = (s3Client, fileData, destination, options = { log: _.noop }) =>
 
   return promise
     .then(() => {
-      log.info('\nUPLOADED file to S3\nlocal path:%s \nS3 path: %s\n', file.path, destination);
+      log('\nUPLOADED file to S3\nlocal path:%s \nS3 path: %s\n', file.path, destination);
 
       return file;
     })

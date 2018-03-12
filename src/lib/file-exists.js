@@ -1,4 +1,8 @@
 /**
+ * @module /src/lib/file-exists.js
+ */
+
+/**
  * Check if the given filepath exists in amazon s3
  * NOTE: This function only check file, it won't work with directory.
  *
