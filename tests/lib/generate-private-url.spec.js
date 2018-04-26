@@ -7,6 +7,7 @@ const { expect } = chai;
 chai.use(require('sinon-chai'));
 
 const credential = {
+  baseUrl: 'anything.is.fine',
   bucket: 'somestring',
   key: 'somestring',
   secret: 'somestring',

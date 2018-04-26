@@ -7,9 +7,11 @@ const Bluebird = require('bluebird');
 const knox = require('knox-s3');
 
 const fileExists = require('./lib/file-exists');
+const createFilePathUrl = require('./lib/create-file-path-url');
 const uniqueFilepath = require('./lib/unique-file-path');
 const copy = require('./lib/copy');
 const upload = require('./lib/upload');
+const uploadBuffer = require('./lib/upload-buffer');
 const remove = require('./lib/remove');
 const download = require('./lib/download');
 
@@ -20,19 +22,21 @@ const mainLibraries = {
   uniqueFilepath,
   copy,
   upload,
+  uploadBuffer,
   remove,
   download,
 };
 
 module.exports = (credential) => {
   const {
+    baseUrl,
     bucket,
     key,
     secret,
     region,
   } = credential;
 
-  if (!bucket || !key || !secret || !region) {
+  if (_.some([baseUrl, bucket, key, secret, region], _.isNil)) {
     throw new Error('Incorrect credential');
   }
 
@@ -47,6 +51,7 @@ module.exports = (credential) => {
 
   _.assign(libraries, {
     generatePrivateUrl: _.partial(generatePrivateUrl, credential),
+    createFilePathUrl: _.partial(createFilePathUrl, credential),
   });
 
   return libraries;
