@@ -1,6 +1,6 @@
 {
   "name": "estiga",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "a tiny helper library for doing AWS S3 stuff",
   "main": "src/index.js",
   "scripts": {
