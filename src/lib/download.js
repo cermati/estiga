@@ -37,8 +37,6 @@ module.exports = (s3Client, s3Path, destination, options = { log: _.noop }) => {
       downloadStream
         .on('error', reject)
         .pipe(writeStream);
-
-      return resolve();
     });
   });
 
